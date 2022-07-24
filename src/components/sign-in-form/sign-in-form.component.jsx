@@ -32,7 +32,17 @@ const SignInForm = () => {
       await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
     } catch (error) {
-      console.log(error);
+      switch (error.code) {
+        case 'auth/wrong-password':
+          alert('incorrect password for email');
+          break;
+        case 'auth/user-not-found':
+          alert('no user associated with this email');
+          break;
+        default:
+          console.log(error);
+          break;
+      }
     }
   }
   const signInWithGoogle = async () => {
@@ -49,7 +59,7 @@ const SignInForm = () => {
         <FormInput required type='password' label='Password' name='password' value={password} onChange={handleChange}></FormInput>
         <div className="buttons-container">
           <Button type='submit'>Sign In</Button>
-          <Button onClick={ signInWithGoogle } buttonType='google'>Google sign in</Button>
+          <Button type='button' onClick={ signInWithGoogle } buttonType='google'>Google sign in</Button>
         </div>
       </form>
     </div>
