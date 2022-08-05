@@ -32,12 +32,12 @@ googleProvider.setCustomParameters({
   prompt: 'select_account'
 });
 
+export const auth = getAuth();
+
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if(!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
-
-export const auth = getAuth();
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
